@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+#define MAX 100
+
+int pq[MAX];
+int size = 0;
+
+// Insert
+void insert(int x) {
+    pq[size++] = x;
+}
+
+// Delete (remove smallest)
+void deleteMin() {
+    if (size == 0) {
+        printf("-1\n");
+        return;
+    }
+
+    int minIndex = 0;
+    for (int i = 1; i < size; i++) {
+        if (pq[i] < pq[minIndex])
+            minIndex = i;
+    }
+
+    printf("%d\n", pq[minIndex]);
+
+    pq[minIndex] = pq[size - 1];
+    size--;
+}
+
+// Peek
+void peek() {
+    if (size == 0) {
+        printf("-1\n");
+        return;
+    }
+
+    int min = pq[0];
+    for (int i = 1; i < size; i++) {
+        if (pq[i] < min)
+            min = pq[i];
+    }
+
+    printf("%d\n", min);
+}
+
+int main() {
+    int n;
+    char op[10];
+    int x;
+
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        scanf("%s", op);
+
+        if (op[0] == 'i') {
+            scanf("%d", &x);
+            insert(x);
+        } else if (op[0] == 'd') {
+            deleteMin();
+        } else {
+            peek();
+        }
+    }
+}

@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+#define MAX 100
+
+int dq[MAX];
+int front = -1, rear = -1;
+
+void push_front(int x) {
+    if (front == -1) front = rear = 0;
+    else front--;
+    dq[front] = x;
+}
+
+void push_back(int x) {
+    if (rear == -1) front = rear = 0;
+    else rear++;
+    dq[rear] = x;
+}
+
+void pop_front() {
+    if (front == -1) printf("-1\n");
+    else front++;
+}
+
+void pop_back() {
+    if (rear == -1) printf("-1\n");
+    else rear--;
+}
+
+void display() {
+    for (int i = front; i <= rear; i++)
+        printf("%d ", dq[i]);
+}
+
+int main() {
+    push_back(10);
+    push_back(20);
+    push_front(5);
+    display();
+}
